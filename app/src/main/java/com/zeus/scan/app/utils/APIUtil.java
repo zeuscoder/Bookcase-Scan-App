@@ -11,11 +11,21 @@ import retrofit2.Retrofit;
 
 public class APIUtil {
 
-    private final static String API_BASE_URL = "https://api.douban.com";
+    private final static String API_BASE_URL = "http://127.0.0.1:12580/bookcase/";
+
+    private final static String DOUBAN_BASE_URL = "https://api.douban.com/";
 
     public static Retrofit initService() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(API_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                .build();
+        return retrofit;
+    }
+
+    public static Retrofit initDouBanService() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(DOUBAN_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .build();
         return retrofit;
